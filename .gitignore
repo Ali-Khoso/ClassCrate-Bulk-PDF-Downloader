@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+*.pem
+*.key
+credentials.json
+.env*
+coverage/
+.DS_Store
