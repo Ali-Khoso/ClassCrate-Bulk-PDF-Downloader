@@ -2,7 +2,41 @@
 
 **Free, local, subject-wise Google Classroom bulk downloader.** Download accessible PDF, PPTX, DOCX, XLSX, and other attachments without a backend or subscription.
 
-> **Status: local developer build (v0.2.0).** The extension has not been verified end-to-end with a university account. A Google Chrome Extension OAuth client ID and university-admin permission may be needed. Do not claim production readiness until completing the manual tests.
+> **Status: local developer build (v0.2.0).** Tested with an authorized university Classroom account: 15 files fetched and downloaded successfully. This remains a beta; other users must configure Google OAuth and have the required permissions. Public distribution and full production validation are still pending.
+
+## Screenshots — Complete ClassCrate workflow
+
+The following screenshots document a real university Classroom test: Google sign-in, subject selection, file discovery, original-format downloads, and the success/feedback screen. The sign-in image has identifying account details redacted.
+
+### 1. Welcome to ClassCrate
+
+![ClassCrate welcome screen](docs/screenshots/01-welcome.webp)
+
+### 2. Sign in with Google
+
+![ClassCrate Google sign-in account selection](docs/screenshots/02-google-signin.webp)
+
+### 3. Choose a Classroom subject
+
+![ClassCrate subject list](docs/screenshots/03-subject-list.webp)
+
+### 4. Fetch subject files
+
+![ClassCrate Fetch subject files action](docs/screenshots/04-fetch-files.webp)
+
+### 5. Preview and select files
+
+![ClassCrate file preview with filters and selection](docs/screenshots/05-file-preview.webp)
+
+### 6. Track your bulk downloads
+
+![ClassCrate download progress](docs/screenshots/06-download-progress.webp)
+
+### 7. Download completed and give feedback
+
+![ClassCrate successful download and feedback screen](docs/screenshots/07-download-complete.webp)
+
+> These screenshots show a 15-file test in an authorized university Classroom. Availability varies with each account's Google Workspace permissions. Images are privacy-redacted and optimized for GitHub.
 
 ## Features
 
