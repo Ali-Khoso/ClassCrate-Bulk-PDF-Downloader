@@ -56,6 +56,12 @@
       '</b><div class="small muted">'+esc(c.section)+'</div></button>').join('') ||
       '<p class="muted">No active subjects were returned.</p>')+'</div>';
   }
+  function chosen() {
+    return '<div class="stack"><div class="title">'+esc(s.course?.name || 'Selected subject')+'</div>'+
+      '<p class="muted">Fetch accessible materials, assignments and announcements from this subject.</p>'+
+      btn(s.busy ? 'Fetching files…' : 'Fetch subject files','fetch','primary wide',s.busy)+
+      btn('Choose another subject','back')+'</div>';
+  }
   function files() {
     const available=s.files.filter(f=>f.downloadable).length;
     const selected=s.files.filter(f=>f.downloadable && s.selected.has(f.id)).length;
@@ -101,7 +107,7 @@
       return;
     }
     const body=s.page==='courses'?courses():s.page==='files'?files():s.page==='progress'?progress():
-      s.page==='done'?done():welcome();
+      s.page==='done'?done():s.page==='chosen'?chosen():welcome();
     let footer='';
     if (s.page==='files') footer=btn('Download selected','download','primary',s.busy || !s.selected.size);
     if (s.page==='progress') footer=btn('Open Downloads','open')+btn('Cancel','cancel','',s.job?.status!=='running');
@@ -136,13 +142,14 @@
     const star=event.target.closest('[data-star]');
     if (star) {s.stars=Number(star.dataset.star);render();return;}
     const subject=event.target.closest('[data-course]');
-    if (subject) {void run(()=>loadFiles(subject.dataset.course));return;}
+    if (subject) {s.course=s.courses.find(c=>c.id===subject.dataset.course);s.page='chosen';render();return;}
     const button=event.target.closest('[data-action]');
     if (!button) return;
     switch(button.dataset.action) {
       case 'toggle': s.open=!s.open;render();if(s.open && s.page==='welcome') void run(initialize);return;
       case 'login': return void run(async()=>{await send('CONNECT');await loadCourses();});
       case 'refresh': return void run(loadCourses);
+      case 'fetch': return void run(()=>loadFiles(s.course.id));
       case 'back': return void run(loadCourses);
       case 'select': case 'clear': case 'invert':
         for (const f of filtered().filter(f=>f.downloadable)) {
